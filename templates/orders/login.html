@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    <title>Login</title>
+  </head>
+
+  <style>
+    body {
+      height: 100%; 
+      width: 100%;
+      position: relative;
+    }
+    
+    .preloader {
+      align-items: center;
+      /* background: rgb(23, 22, 22); */
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      left: 0;
+      position: fixed;
+      top: 0;
+      transition: opacity 0.3s linear;
+      width: 100%;
+      /* z-index: 9999; */
+    }
+
+  </style>
+
+  <body>
+
+    <div class="preloader">
+      <img src="{% static 'images/loader1.svg' %}" alt="spinner">
+    </div>
+
+    <div class="container mt-5">
+          <div class="row justify-content-center mb-3 generate-otp">
+              <div class="col-4">
+                  <input type="tel" class="form-control" id="exampleInputNumber" aria-describedby="Phone" name="phone" placeholder="Enter Phone Number">
+                  <p class="small text-danger number-err d-none mt-2">Enter valid number</p>
+              </div>
+              <div class="col-1">
+                  <button type="submit" class="btn btn-danger generate-otp-btn">Generate OTP</button>
+              </div>
+          </div>
+
+          <div class="row justify-content-center enter-otp">
+            <div class="col-4">
+                <input type="tel" class="form-control" id="exampleInputOTP" aria-describedby="otp" placeholder="Enter your OTP">
+                <p class="small text-danger otp-err d-none mt-2">Enter valid OTP</p>
+            </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-success enter-otp-btn">Enter OTP</button>
+            </div>
+        </div>
+    </div>
+
+  </body>
+
+
+  <script>
+    //Main ajax calls
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+            }
+        }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    function sameOrigin(url) {
+        // test that a given url is a same-origin URL
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        // or any other URL that isn't scheme relative or absolute i.e relative.
+        !(/^(\/\/|http:|https:).*/.test(url));
+    }
+
+
+    $(document).ready(function(){
+      console.log("ready");
+
+      $(".generate-otp").removeClass('d-none') ;
+      $(".enter-otp").addClass('d-none') ;
+      $('.number-err').addClass('d-none') ;
+      $('.otp-err').addClass('d-none') ;
+      $('.preloader').hide() ;
+    
+
+      $(".generate-otp-btn").click(function(e){
+          e.preventDefault();
+
+          let phone = $('#exampleInputNumber').val();
+          if(!phone){
+            $('.number-err').removeClass('d-none');
+            return;
+          }
+        
+
+          $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                $('.preloader').show();
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                //! Send the token to same-origin, relative URLs only.
+                //! Send the token only if the method warrants CSRF protection
+                //! Using the CSRFToken value acquired earlier
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+          });
+
+
+        // url = `https://2factor.in/API/V1/${api_key}/SMS/+91${phone}/AUTOGEN`
+        // const api_key = 'ed4bd15d-180d-11eb-b380-0200cd936042' ;
+        let url = 'http://127.0.0.1:8000/api/phone/register'
+        let data = {
+          'phone_number': phone 
+        }
+
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: data,
+          error: function(err){
+            console.log("Error", err);
+            err_text = err["responseText"]["phone_number"];
+            $('.number-err').text = err_text ;
+            $('.number-err').removeClass('d-none');
+          },
+          success: function (data) {
+            console.log(data);
+            $('.preloader').hide();
+            session_token = data["session_token"];
+            
+            localStorage.clear();
+            localStorage.setItem('session_token', session_token);                  // storing token in localStorage
+            localStorage.setItem('phone_number', phone);                           // storing phone in localStorage
+
+            $('.number-err').addClass('d-none');
+            $(".generate-otp").addClass('d-none');
+            $(".enter-otp").removeClass('d-none');
+          }
+        });         
+      });
+
+
+      // When user enters OTP
+      $(".enter-otp-btn").click(function(e){
+          e.preventDefault();
+          console.log("Clicked Enter OTP !!");
+
+          let otp = $('#exampleInputOTP').val();
+          if(!otp){
+              $('.otp-err').removeClass('d-none');
+              return ;
+          }
+          
+          $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                $('.preloader').show();
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                // Send the token to same-origin, relative URLs only.
+                // Send the token only if the method warrants CSRF protection
+                // Using the CSRFToken value acquired earlier
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+          });
+
+          const session_token = localStorage.getItem('session_token');
+          const phone_number = localStorage.getItem('phone_number');
+          let url = 'http://127.0.0.1:8000/api/phone/verify'
+          let data = {
+            "phone_number": phone_number,
+            "security_code": otp,
+            "session_token": session_token
+          }
+
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            error: function(err){
+              console.log("Error", err);
+              err_text = err["responseText"]["non_field_errors"];
+              $('.otp-err').text = err_text;
+              $('.otp-err').removeClass('d-none');
+            },
+            success: function (data) {
+              console.log(data);
+              $('.preloader').hide();
+              window.location.href = '/menu';
+            }
+          });   
+
+      });
+    
+
+    });
+  </script>
+</html>

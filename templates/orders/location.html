@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}BigPizza | Location {% endblock %}
+
+{% block navlinks %}
+    <li><a href="{% url 'menu' %}">MENU</a></li>
+    {% if request.user.is_authenticated %}
+        <li><a href="{% url 'cart-view' %}">CART</a></li>
+    {% endif %}
+    <li><a href="{% url 'contact' %}">CONTACT</a></li>
+    <li><a class="active" href="{% url 'location' %}">LOCATION</a></li>
+    <li><a href="{% url 'about' %}">ABOUT</a></li>
+    {% if request.user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    {% else %}
+        <li><a href="{% url 'login' %}">LOGIN</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="location-section text-center bg-grey">
+    <h2 class="location-header">Location</h2>
+    <h4 class="location-para"> My shops available here </h4>
+    <div class="row text-center">
+        <div class="col-sm-4">
+            <div class="location-thumbnail">
+                <img src="paris.jpg" alt="MURADNAGAR">
+                <p><strong>MURADNAGAR</strong></p>
+                <p>Here, we have delivery service only</p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="location-thumbnail">
+                <img src="newyork.jpg" alt="S.R.M">
+                <p><strong>S.R.M</strong></p>
+                <p>Both,shop and delivery</p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="location-thumbnail">
+                <img src="sanfran.jpg" alt="M.M college">
+                <p><strong>M.M college</strong></p>
+                <p>Both,shop and delivery</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

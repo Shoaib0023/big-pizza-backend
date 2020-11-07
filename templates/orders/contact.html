@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}BigPizza | Contact {% endblock %}
+
+{% block navlinks %}
+    <li><a href="{% url 'menu' %}">MENU</a></li>
+    {% if request.user.is_authenticated %}
+        <li><a href="{% url 'cart-view' %}">CART</a></li>
+    {% endif %}
+    <li><a class="active" href="{% url 'contact' %}">CONTACT</a></li>
+    <li><a href="{% url 'location' %}">LOCATION</a></li>
+    <li><a href="{% url 'about' %}">ABOUT</a></li>
+    {% if request.user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    {% else %}
+        <li><a href="{% url 'login' %}">LOGIN</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<section class="contact-section">
+    <div class="container contact bg-grey">
+      <h2 class="text-center contact-header">CONTACT</h2>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 contact-text">
+          <p>Have any feedback or queries?
+            We'd love to hear from you.
+          </p>
+          <p>Contact us for delivering best pizzas .</p> <br>
+          <p><span class="glyphicon glyphicon-map-marker"></span> MODINAGAR, UP</p>
+          <p><span class="glyphicon glyphicon-phone"></span> +91 9084438490</p>
+          <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+        </div>
+        <div class="col-sm-7">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+            </div>
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+            </div>
+          </div>
+          <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <button class="btn btn-default pull-right" type="submit">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  
+{% endblock %}
