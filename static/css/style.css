@@ -214,7 +214,7 @@ nav li a {
       height: 300px; 
       /* background: rgba(232, 74, 77); */
       /* background-image: url('images/1.webp'); */
-      background-image: url('images/cell-background-pizza-right.jpg');
+      background-image: url('../images/cell-background-pizza-right.jpg');
       /* opacity: 0.9; */
       background-size: cover;
       background-repeat: no-repeat;

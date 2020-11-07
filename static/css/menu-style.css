@@ -144,18 +144,7 @@ nav li a {
     padding: 12px;
     
   }
-  /* .card-title{
-    background-image: url(/static/assets/icons/shadow.svg);
-    min-width: 0.3em;
-    min-height: 0.3em;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    width: 6rem;
-    height: 4rem;
-    position: absolute;
-    bottom: 0px;
-  } */
-
+  
   .pizza-name {
       font-weight: 700;
  }
