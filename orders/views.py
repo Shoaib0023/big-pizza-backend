@@ -47,7 +47,7 @@ def verify_and_register(request):
 
         print(data)
 
-        url = 'https://big-pizza.herokuapp.com/api/phone/verify'
+        url = 'http://127.0.0.1:8000/api/phone/verify'
         response = requests.post(url, data)
         print("Response : ", response.json())
         print("Response Status : ", response.status_code)
