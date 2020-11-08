@@ -17,6 +17,18 @@
   border-color: rgb(59, 89, 152);
 }
 
+.fb-icon{
+  color: white;
+  font-size: 12px;
+  margin-right:0.4rem;
+}
+
+.gg-icon{
+  color: white;
+  font-size: 12px;
+  margin-right:0.3rem;
+}
+
 .fb-btn:hover{
   color: white;
   background-color: rgb(66, 114, 218);

@@ -34,7 +34,7 @@
                 <img src="{% static 'images/2.jpg' %}" alt="">
             </div>
             <div class="card_title title-black ">
-                <p class="small-heading"> <a href="menu.html#veg-pizza">Veg Pizza</a> </p>
+                <p class="small-heading"> <a href="{% url 'menu' %}" class="menu-link">Veg Pizza</a> </p>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                 <img src="{% static 'images/3.jpg' %}" alt="">    
             </div>
             <div class="card_title title-black">
-                <p><a href="menu.html#non-veg-pizza">Non-Veg Pizza</a></p>
+                <p><a href="{% url 'menu' %}" class="menu-link">Non-Veg Pizza</a></p>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                 <img src="{% static 'images/3.jpg' %}" alt="">    
             </div>
             <div class="card_title title-black">
-                <p>Burgers</p>
+                <p><a href="{% url 'menu' %}" class="menu-link">Burgers</a></p>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                 <img src="{% static 'images/4.jpg' %}" alt="">  
                 </div>
             <div class="card_title title-black ">
-                <p>Desserts</p>
+                <p><a href="{% url 'menu' %}" class="menu-link">Desserts</a></p>
             </div>
         </div>
             
@@ -72,7 +72,7 @@
                 <img src="{% static 'images/5.jpg' %}" alt="">  
             </div>
             <div class="card_title title-black ">
-                <p>Drinks</p>
+                <p><a href="{% url 'menu' %}" class="menu-link">Drinks</a></p>
             </div>
         </div>
         
@@ -81,7 +81,7 @@
                 <img src="{% static 'images/3.jpg' %}" alt="">    
             </div>
             <div class="card_title title-black">
-                <p>Others</p>
+                <p><a href="{% url 'menu' %}" class="menu-link">Others</a></p>
             </div>
         </div>
     </div>

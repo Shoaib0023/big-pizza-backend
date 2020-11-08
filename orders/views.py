@@ -4,6 +4,12 @@ from django.urls import reverse
 from decimal import Decimal
 from django.contrib.auth import logout as django_logout
 
+from django.contrib.auth import login as django_login
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
+from django.contrib.auth.decorators import login_required
+
 import requests
 
 from . import forms
@@ -39,13 +45,41 @@ def verify_and_register(request):
             "session_token": request.POST.get("session_token", None)
         }
 
+        print(data)
+
         url = 'http://127.0.0.1:8000/api/phone/verify'
         response = requests.post(url, data)
-        print(response.json())
-        print(response.status_code)
+        print("Response : ", response.json())
+        print("Response Status : ", response.status_code)
 
         if response.status_code == 200:
-            return JsonResponse(response.json())
+            if User.objects.filter(username=data["phone_number"]).exists():
+                user = User.objects.get(username=data["phone_number"])
+                # logged_user = authenticate(username=user.username, password=user.password)
+                if user is not None:
+                    print("User already exists !")
+                    django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                    print(request.user.is_authenticated)
+                    return JsonResponse({"success": "Successfully Logged in"}, status=200)
+                else:
+                    print("Not authenticated !!")
+
+            else:
+                print("Creating new user !!")
+                user = User.objects.create(
+                            username=data["phone_number"],
+                            password="abcd@786"
+                        )
+
+                userProfile = UserProfile.objects.create(
+                            user=user, 
+                            phone=data["phone_number"], 
+                            is_verified=True
+                        )
+
+                django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                print(request.user.is_authenticated)
+                return JsonResponse({"success": "Successfully Logged in"}, status=201)
 
         else:
             return JsonResponse(response.json(), status=400)
@@ -59,7 +93,6 @@ def login(request):
 def logout(request):
     django_logout(request)
     return  HttpResponseRedirect('/menu')
-    # return render(request, 'orders/index.html', {'message': 'Logged out.'})
 
 
 def menu_view(request):
@@ -70,12 +103,17 @@ def menu_view(request):
 
     if request.user.is_authenticated:
         customer = request.user
+
         try:
-            cart = Order.objects.get(customer=customer)
+            cart = Order.objects.get(customer=customer, in_cart=True)
             args["items"] = cart.items.all().count()
 
         except Order.DoesNotExist:
             print("Order does not exists !!!")
+
+        except Order.MultipleObjectsReturned:
+            cart = Order.objects.filter(customer=customer)[0]
+            args["items"] = cart.items.all().count()
 
     return render(request, 'orders/menu.html', args)
 
@@ -128,8 +166,6 @@ def update_total(order):
 
 
 def add_item(request):
-    print("User ", request.user)
-    print("Data ", request.POST)
     if request.method == "GET":
         raise Http404
 
@@ -172,8 +208,7 @@ def add_item(request):
             newitem.save()
             update_total(order)
 
-        print(request.POST.getlist('toppings[]'))
-        # print(request.POST['toppings'])
+        # print(request.POST.getlist('toppings[]'))
 
         for topping_id in request.POST.getlist("toppings[]"):
             pizzatopping = PizzaTopping.objects.get(id=topping_id)
@@ -184,9 +219,10 @@ def add_item(request):
     return HttpResponseRedirect(reverse('menu'))
 
 
+@login_required(login_url='/login')
 def cart_view(request):
     try:
-        order = Order.objects.get(customer=request.user)
+        order = Order.objects.get(customer=request.user, in_cart=True)
         items = order.items.all()
         args = {
             'items': items,
@@ -196,6 +232,12 @@ def cart_view(request):
     except Order.DoesNotExist:
         print('Order Does not exists ')
         args = {}
+
+    except Order.MultipleObjectsReturned:
+        print("Multiple cart found")
+        cart = Order.objects.filter(customer=request.user)[0]
+        args = {}
+
 
     return render(request, 'orders/cart.html', args)
 
@@ -208,8 +250,7 @@ def remove_item_cart(request):
         order = Order.objects.get(id=order_id)
         item = order.items.all().get(id=item_id)
 
-        print(item.id, item.name)
-
+        # print(item.id, item.name)
         item.delete()
         update_total(order)
 
@@ -231,15 +272,14 @@ def empty_cart(request, id):
     return HttpResponseRedirect(reverse('cart-view'))
 
 
-def place_order(request):
-    customer = request.user 
-    try:
-        order = Order.objects.get(customer=request.user, in_cart=True)
-    except Order.DoesNotExist:
-        raise Http404("Order does not exists !!! ")
-    else:
-        order.placed=True
-        order.in_cart=False
-        order.save()
+def checkout(request):
+    return render(request, 'orders/checkout.html')
 
-    return render(request, 'orders/thanks.html')
+
+def place_order(request):
+    customer = request.user
+    profile = customer.profile
+    print(customer)
+    print(customer.email, customer.username)
+
+    return render(request, 'orders/place-order-modal.html')

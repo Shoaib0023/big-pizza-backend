@@ -4,60 +4,58 @@
 {% block title %}BigPizza | Cart{% endblock %}
 
 {% block body%}
-<div class="container cart-section">
+
+<div class="cart-section">
     {% if items %}
-        <!-- <div class="row">
-            <div class="col-8">
-
-            </div>
-
-            <div class="col-4">
-
-            </div>
-        </div> -->
-    
         {% for item in items %}
-            <div class="row justify-content-around cart-item">
-                <div class="col-sm-3 col-md-3 col-lg-2">
-                    <img class="img-responsive" src="{% static 'images/6.jpg' %}" width=180px height=180px> 
-                </div>  
-                <div class="col-sm-4 col-md-4 col-lg-3">
-                    <h3 class="cart-item-name">{{ item.name }}</h3>
-                    <p class="cart-item-description">{{item.description}}</p>
-                    <p class="cart-item-size badge">{{ item.size }}</p>
-                    <p class="cart-item-category badge">{{ item.category.name }}</p>
-                </div>
-                <div class="col-sm-3 col-md-3 col-lg-2">
-                    <h5> <strong>Toppings</strong> </h5>
-                    <ul>
-                        {% for topping in item.toppings.all %}
-                            <li class="topping-name">{{ topping.name }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="col-sm-3 col-md-3 col-lg-2">
-                    <!-- <h5> <strong>Price</strong> </h5> -->
-                    <p class="cart-price">Rs {{ item.price }}</p>
+            <div class="row">
 
-                    {% for topping in item.toppings.all %}
-                        <p class="small">+ Rs 60</p>
-                    {% endfor %}
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 cart-item">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                            <img class="img-responsive" src="{% static 'images/6.jpg' %}" width=200px height=200px> 
+                        </div>  
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4">
+                            <h3 class="cart-item-name"> <strong>{{ item.name }}</strong></h3>
+                            <p class="cart-item-description">{{item.description}}</p>
+                            <p class="cart-item-size badge">{{ item.size }}</p>
+                            <p class="cart-item-category badge">{{ item.category.name }}</p>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+                            {% if item.toppings.all.count > 0 %}
+                                <h5 id="topping-header">Toppings</h5>
+                                <ul>
+                                    {% for topping in item.toppings.all %}
+                                        <li class="topping-name">{{ topping.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <p class="cart-price">{{ item.price }}</p>
+        
+                            {% for topping in item.toppings.all %}
+                                <p class="small price">60</p>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                            <button class="btn btn-sm btn-danger removebtn" onClick='removeBtn("{{ item.name}}", "{{ item.id }}", "{{ order.id }}", "{{ item.size }}")'><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>        
+                    <!-- <hr> -->
                 </div>
-                <div class="col-1">
-                    <button class="btn btn-sm btn-danger removebtn" onClick='removeBtn("{{ item.name}}", "{{ item.id }}", "{{ order.id }}", "{{ item.size }}")'>Remove</button>
-                </div>
-            </div>        
-            <hr>
-            
+            </div>
+
+
             <!-- Modal -->
             <div class="modal left fade" id="confirm-remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                    <div class="modal-content">
             
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" id="close-icon">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel"></h4>
-                      <!-- <p class="small">{{ pizza.description }}</p> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" id="close-icon">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
 
                     <div class="modal-body">
@@ -70,27 +68,46 @@
                 
                     </div>
                 </div>
-            </div>
-        
-            
+            </div>        
         {% endfor %}
-        
-        {% if order %}
-            <h5>TOTAL : {{ order.total }}</h5>
-            <a href="{% url 'place-order' %}" class="btn btn-sm btn-block btn-success place-order">PLace Order</a>
-        {% else %}
-            <h5>TOTAL : Rs  0</h5>
-        {% endif %}
-
     {% else %}
-    <div class="row">
-        <div class="col-4">
-            <p>No Item in cart </p>                    
-        </div>
-    </div>
+
     {% endif %}
 
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 price-details">
+        
+        <div class="payment-details">
+            <h5 class="payment-mode-header">Mode of Payment</h5>
+            <p class="small lead">**We only provides Cash on Delivery for now</p>
+            <hr>
+            <p><i class="far fa-check-square cod"></i>Cash on Delivery</p>
+        </div>
+
+        <div id="price-details-inner">
+            <div class="sub-price-details">
+                <span class="price-detail-label">Sub Total</span>
+                <span class="price-detail-price">{{ order.total }}</span>
+            </div>
+            <div class="sub-price-details">
+                <span class="price-detail-label">GST</span>
+                <span class="price-detail-price">0</span>
+            </div>
+            <div class="sub-price-details">
+                <span class="price-detail-label">Discount</span>
+                <span class="price-detail-price">0</span>
+            </div>
+            <hr>
+            <div class="sub-price-details">
+                <span class="price-detail-label">Grand Total</span>
+                <span class="price-detail-price">{{ order.total }}</span>
+            </div>
+            <button class="btn btn-success btn-sm btn-block" onClick='placeOrder("{{ order.id }}")'>Place Order</button>
+        </div>
+    </div>
 </div>    
+
+<div id="place-order-div"></div>
+
 {% endblock %}
 
   
@@ -117,7 +134,7 @@
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
-    function sameOrigin(url) {
+    function sameOrigin(url) {  
         // test that a given url is a same-origin URL
         // url could be relative or scheme relative or absolute
         var host = document.location.host; // host + port
@@ -134,7 +151,7 @@
 
     // DOMS loads 
     $(document).ready(function(){
-        function placeOrder(order_id){
+        placeOrder = (order_id) => {
             $.ajaxSetup({
                 beforeSend: function (xhr, settings) {
                     if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
@@ -152,17 +169,20 @@
 
             $.ajax({
                 url: "{% url 'place-order' %}" ,
-                type: POST,
+                type: "POST",
                 data: data,
                 complete: function(data){
-                    console.log("Order is completed !!") ;
+                    console.log("Order is completed !!", data) ;
                 },
                 success: function(data){    
-                    console.log("Order is Placed !!") ;
-                    window.location.reload() ;
+                    console.log("Order is Placed !!", data) ;
+                    $('#place-order-div').html(data);
+                    $('#place-order-modal').modal();
+                    // window.location.reload() ;
                 }
             })
         }
+        
     
         removeBtn = (name, item_id, order_id, size) => {
             // console.log(item_id, order_id);
@@ -197,7 +217,7 @@
 
             $.ajax({
                 url: `{% url 'remove-item' %}`,
-                type: 'POST',
+                type: "POST",
                 data: data,
                 error: function(err){
                     console.log("Error : ", err);
@@ -214,9 +234,6 @@
         });
 
     });
-
-
-
 
 
 </script> 

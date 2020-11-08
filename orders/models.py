@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="profile")
     phone = models.IntegerField(blank=False)
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.user.email} - {self.phone}'
+        return f'{self.user.username} - {self.phone}'
 
 
 class PizzaTopping(models.Model):
@@ -55,7 +55,7 @@ class Order(models.Model):
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Order #{self.id} by {self.customer.first_name}'
+        return f'Order #{self.id} by {self.customer.username}'
 
 
 class OrderItem(models.Model):

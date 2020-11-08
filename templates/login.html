@@ -50,16 +50,15 @@
                 <div class="row social-btn-row justify-content-around">
                 
                     <div class="col-12 col-md-6 col-lg-6 mb-3">
-                    <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="btn btn-primary btn-block btn-sm fb-btn">Facebook</a>
+                        <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="btn btn-primary btn-block btn-sm fb-btn"><i class="fab fa-facebook-f fb-icon"></i>Facebook</a>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-6">
-                        <a href="{% provider_login_url 'google' %}" class="btn btn-warning btn-block btn-sm gg-btn">Google</a>
+                        <a href="{% provider_login_url 'google' %}" class="btn btn-warning btn-block btn-sm gg-btn"> <i class="fab fa-google gg-icon" aria-hidden="true"></i> Google</a>
                     </div>
 
                 </div>
             </div>
-
         </div>
 
     {% endif %}
@@ -224,7 +223,7 @@
               console.log(data);
               $('.preloader').hide();
               $('.login-form-1').css("opacity", "1");
-            //   window.location.href = '/menu';
+              window.location.href = '/menu';
             }
           });   
 
