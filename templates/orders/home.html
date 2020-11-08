@@ -89,8 +89,44 @@
 
 <!-- /Cards -->
 
+
+<!-- crousel -->
+<main>
+    <div id="carousel">
+       <div class="hideLeft">
+        <img src="{% static 'images/pizza offer 1.jpg' %}">
+      </div>
+  
+      <div class="prevLeftSecond">
+        <img src="{% static 'images/pizza offer 2.jpg' %}">
+      </div>
+  
+      <div class="prev">
+        <img src="{% static 'images/pizza offer 3.jpg' %}">
+      </div>
+  
+      <div class="selected">
+        <img src="{% static 'images/pizza offer 4.jpg' %}">
+      </div>
+  
+      <div class="next">
+        <img src="{% static 'images/pizza offer 5.jpg' %}">
+      </div>
+  
+      <div class="nextRightSecond">
+        <img src="{% static 'images/pizza offer 6.jpg' %}">
+      </div>
+  
+      <div class="hideRight">
+        <img src="{% static 'images/pizza offer 7.jpg' %}">
+      </div>
+  
+    </div>
+</main>
+  
+
  <!-- footer -->
-<footer class="footer-bs">
+<!-- <footer class="footer-bs">
     <div class="container">
         <div class="row justify-content-around">
             <div class="col-sm-6 col-md-6 footer-brand animated fadeInLeft">
@@ -131,8 +167,70 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
+{% endblock %}
+
+
+
+{% block script %}
+<script>
+    function moveToSelected(element) {
+        if (element == "next") {
+            var selected = $(".selected").next();
+        } else if (element == "prev") {
+            var selected = $(".selected").prev();
+        } else {     
+            var selected = element;
+        }
+        
+        var next = $(selected).next();
+        var prev = $(selected).prev();
+        var prevSecond = $(prev).prev();
+        var nextSecond = $(next).next();
+        
+        $(selected).removeClass().addClass("selected");
+        
+        $(prev).removeClass().addClass("prev");
+        $(next).removeClass().addClass("next");
+        
+        $(nextSecond).removeClass().addClass("nextRightSecond");
+        $(prevSecond).removeClass().addClass("prevLeftSecond");
+        
+        $(nextSecond).nextAll().removeClass().addClass('hideRight');
+        $(prevSecond).prevAll().removeClass().addClass('hideLeft');  
+  }
+  
+  // Eventos teclado
+  $(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        moveToSelected('prev');
+        break;
+  
+        case 39: // right
+        moveToSelected('next');
+        break;
+  
+        default: return;
+    }
+    e.preventDefault();
+  });
+  
+  $('#carousel div').click(function() {
+  moveToSelected($(this));
+  });
+  
+  $('#prev').click(function() {
+  moveToSelected('prev');
+  });
+  
+  $('#next').click(function() {
+  moveToSelected('next');
+  });
+  
+  </script>
+  
 {% endblock %}
 
 

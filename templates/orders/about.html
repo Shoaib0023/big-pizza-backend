@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}BigPizza | Location {% endblock %}
 
 {% block navlinks %}
@@ -18,49 +18,99 @@
 {% endblock %}
 
 {% block body %}
-<div class="container about-section">
-    <div class="row">
-      <div class="col-sm-8">
-        <h2>About Big pizza</h2><br>
-        <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, laboriosam? Pariatur quam unde nam nisi, quo blanditiis iste distinctio, voluptatem quasi iusto deserunt reiciendis commodi ea vel laudantium dolorum quidem dicta? Cumque, eius non ad possimus temporibus modi fugit Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat sunt voluptas velit eveniet eum minima nobis, illo aut id distinctio? Nemo ipsa at consectetur alias incidunt sed nostrum enim obcaecati assumenda porro, iste vero sint, nam sapiente harum necessitatibus ipsum, iure animi quod ut. Et voluptate voluptatem iste obcaecati saepe molestias, soluta explicabo unde architecto iure. In rerum aspernatur fugiat dicta, explicabo facere provident voluptates reiciendis est distinctio fugit voluptatem moles!</alias></h4><br>
-        <button class="btn btn-default btn-lg">Contact</button>
-      </div>
-      <div class="col-sm-4 about-logo-div">
-        <span class="glyphicon glyphicon-signal about-logo"></span>
-      </div>
-    </div>
-  </div>
-  <h2 class="customer">What our customers say</h2>
-  <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-  
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-      <h4>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">Michael Roe, Vice President, Comment Box</span></h4>
-      </div>
-      <div class="item">
-        <h4>"One word... WOW!!"<br><span style="font-style:normal;">John Doe, Salesman, Rep Inc</span></h4>
-      </div>
-      <div class="item">
-        <h4>"Could I... BE any more happy with this company?"<br><span style="font-style:normal;">Chandler Bing, Actor, FriendsAlot</span></h4>
-      </div>
-    </div>
-  
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
+
+<div class="aboutus-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="aboutus">
+                  <h2 class="aboutus-title">About Us</h2>
+                  <p class="aboutus-text">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in.</p>
+                  <p class="aboutus-text">This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem</p>
+                  <a class="aboutus-more" href="{% url 'contact' %}">Contact us</a>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="aboutus-banner">
+                  <img src="{% static 'images/pizza boy.jpg' %}" alt="">
+              </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="feature">
+                  <div class="feature-box">
+                      <div class="clearfix">
+                          <div class="iconset">
+                              <span class="glyphicon glyphicon-cog icon"></span>
+                          </div>
+                          <div class="feature-content">
+                              <h4>Serve with big heart</h4>
+                              <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="feature-box">
+                      <div class="clearfix">
+                          <div class="iconset">
+                              <span class="glyphicon glyphicon-cog icon"></span>
+                          </div>
+                          <div class="feature-content">
+                              <h4>Exclusive Catering order</h4>
+                              <p>Donec vitae sapien ut libero venenatis faucibu. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="feature-box"> 
+                      <div class="clearfix">
+                          <div class="iconset">
+                              <span class="glyphicon glyphicon-cog icon"></span>
+                          </div>
+                          <div class="feature-content">
+                              <h4>Birthday Party Special</h4>
+                              <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. </p>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+              
+          </div>
+          </div>
+
+          <div class="comments">
+
+          <h2 class="customer">What our customers say</h2>
+          <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+          
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                  <h4 class="about-review-name">"This company is the best. I am so happy with the result!"<br>
+                  <span class="about-review">Michael Roe, Vice President, Comment Box</span></h4>
+              </div>
+              <div class="item">
+                <h4 class="about-review">"One word... WOW!!"<br><span class="about-review">John Doe, Salesman, Rep Inc</span></h4>
+              </div>
+              <div class="item">
+                <h4 class="about-review" >"Could I... BE any more happy with this company?"<br><span class="about-review">Chandler Bing, Actor, FriendsAlot</span></h4>
+              </div>
+            </div>
+          
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          </div>
   
 {% endblock %}

@@ -3,7 +3,6 @@ body {
     height: 100%;
     width: 100%;
     background-color: rgb(242, 242, 242);
-    /* overflow: hidden; */
     position: relative;
 }
 
@@ -13,7 +12,6 @@ body {
 
 .preloader {
   align-items: center;
-  /* background: rgb(23, 22, 22); */
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -26,15 +24,12 @@ body {
 }
 
 nav li a {
-   /* color: black; */
    color: white;
    font-weight: 800;
 }
 
 .nav li a:focus,  
 .nav li a:hover{
-  /* background-color: whitesmoke; */
-  /* color: rgba(164, 22, 26); */
   background-color: rgba(164, 22, 26);
   color: white;
   cursor: pointer;
@@ -49,7 +44,6 @@ nav li a {
     color: white; 
     font-size: 11px !important;
     letter-spacing: 4px;
-    /* min-height: 3rem; */
     box-shadow: 0 3px 3px 0 rgba(164, 22, 26); 
     font-weight: 1000;
 }
@@ -67,11 +61,9 @@ nav li a {
    color: white;
 }
 
-
 .navbar-brand {
     letter-spacing: 0px;
     font-size: 3.5rem;
-    /* color: rgba(164, 22, 26); */
     color: white;
   }
 
@@ -81,7 +73,6 @@ nav li a {
 }
 
 .active {
-  /* color: rgba(164, 22, 26); */
   color:white;
 }
 
@@ -219,119 +210,155 @@ nav li a {
     color: rgba(186, 24, 27) ;
   }
 
-  
-  @media all and (max-width: 600px) {
-    .jumbotron {
-      height: 300px; 
-      background-image: url('../images/cell-background-pizza-right.jpg');
-      /* opacity: 0.9; */
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-  }
-
-  .header {
-    margin-top: 9rem;
-    font-size: 1.9rem;
-    font-weight: bold;
-    margin-bottom: 1.1rem;
-    color: white;
-  }
-
-.para {
-    font-size: 1.7rem;
-    margin-bottom: 1.9rem;
-    color: white;
-  }
-
-.custom-btn {
-    color: rgba(53, 80, 112);
-    border: 2px solid white ;
-    background-color: rgba(233, 236, 239);
-    width: 12rem;
-    /* letter-spacing: 0.2rem; */
-    font-size: 1.3rem;
-    font-weight: 600;
-    color:white;
-    background-color: rgba(164, 22, 26);
-  }
-
-.custom-btn:hover {
-    background-color:rgba(164, 22, 26);
-    color: white;
-    border: 1px solid white ;
-  }
-
-
-.varieties {
-    margin-left: 2rem;
-}
-
-.varieties h2 {
-    font-weight: 600;
-    font-size: 2rem;
-    color: black;
-
-}
-
-.card {
-  margin: 30px auto;  
-  width: 130px;
-  height: 130px;
-  border-radius: 40px;
-  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.card .card_image {
-  /* width: inherit; */
-  /* height: inherit; */
-  text-align: center;
-  /* margin-left: 1.3rem; */
-  width: 80%;
-  height:80%;
-  border-radius: 40px;
-}
-
-.card .card_image img {
-  width: inherit;
-  height: inherit;
-  border-radius: 40px;
-  object-fit: cover;
-  /* opacity: 0.8; */
-}
-
-.card .card_title {
-  text-align: center;
-  border-radius: 0px 0px 40px 40px;
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 16px;
-  margin-top: -10px;
-  height: 40px;
-}
-}
 
   .card-list {
     /* On small screens, we are no longer using row direction but column */
     flex-direction: column;
   }
+
+
+
+   /* carousel */
+
+   #carousel {
+    margin-top: 150px;
+    position: relative;
+    height: 400px;
+    top: 20%;
+    transform: translateY(-20%);
+    overflow: hidden;
+  }
+  
+  #carousel div {
+    position: absolute;
+    transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+    opacity: 1;
+  }
+  
+  #carousel div img {
+    width: 400px;
+    height:250px ;
+    transition: width 1s;
+    border-radius: 5px;
+  }
+  
+  #carousel div.hideLeft {
+    left: 0%;
+    opacity: 0;
+    transform: translateY(50%) translateX(-50%);
+  }
+  
+  #carousel div.hideLeft img {
+    width: 200px;
+  }
+  
+  #carousel div.hideRight {
+    left: 100%;
+    opacity: 0;
+    transform: translateY(50%) translateX(-50%);
+  }
+  
+  #carousel div.hideRight img {
+    width: 200px;
+  }
+  
+  #carousel div.prev {
+   
+    z-index: 5;
+    left: 30%;
+    transform: translateY(20px) translateX(-50%);
+  }
+  
+  #carousel div.prev img {
+    width: 300px;
+    
+  }
+  
+  #carousel div.prevLeftSecond {
+    z-index: 4;
+    left: 15%;
+    transform: translateY(15%) translateX(-50%);
+    opacity: .7;
+  }
+  
+  #carousel div.prevLeftSecond img {
+    width: 280px;
+  }
+  
+  #carousel div.selected {
+    z-index: 10;
+    left: 50%;
+    transform: translateY(0px) translateX(-50%);
+  }
+  
+  #carousel div.next {
+    z-index: 5;
+    left: 70%;
+    transform: translateY(20px) translateX(-50%);
+  }
+  
+  #carousel div.next img {
+    width: 300px;
+  }
+  
+  #carousel div.nextRightSecond {
+    z-index: 4;
+    left: 85%;
+    transform: translateY(15%) translateX(-50%);
+    opacity: .7;
+  }
+  
+  #carousel div.nextRightSecond img {
+    width: 280px;
+  }
+
+  @media (max-width: 658px) { #carousel div img {
+    width: 160px;
+    height:100px ;
+   }
+  }
+   @media (max-width: 658px) { #carousel div.prev img,#carousel div.next img {
+    width: 140px;
+    height:100px ;
+   }
+   }
+   @media (max-width: 658px){ #carousel div.nextRightSecond img,#carousel div.prevLeftSecond img{
+    width: 140px;
+    height:100px ;
+    transform: translateY(13%) translateX(-10%)
+    }
+  }
+  @media (max-width: 658px){#carousel {
+    margin-top: 120px;
+    height: 190px;
+   }
+}
   
 
-  .footer-bs {
-    background-color: #3c3d41;
-    padding: 20px 40px 40px 40px ;
-    color: rgba(255,255,255,1.00);
-    /* margin-bottom: 20px; */
-    /* border-bottom-right-radius: 6px; */
-    border-top-left-radius: 0px;
-    /* border-bottom-left-radius: 6px; */
+/* crousel end  */
   
+
+/* footer css */
+.footer-bs {
+  background-color: #3c3d41;
+  padding: 20px 40px 40px 40px ;
+  color: rgba(255,255,255,1.00);
+  margin-bottom: 20px;
+  border-bottom-right-radius: 6px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 6px;
+  
+
+}
+
+.footer-pic{
+width: 97%;
+height: 200px;
+box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)  ;
 }
 
 .footer-bs .footer-brand, .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { 
-  padding:10px 25px; 
+padding:10px 25px; 
 }
 
 .footer-bs .footer-nav { border-color: transparent; }
@@ -353,97 +380,83 @@ nav li a {
 .footer-bs .footer-nav ul.social a:hover { color:rgba(255,255,255,0.80); text-decoration:none; }
 
 .footer-bs .footer-nav h4 {
-	font-size: 11px;
-	text-transform: uppercase;
-	letter-spacing: 3px;
-	margin-bottom:10px;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 3px;
+margin-bottom:10px;
 }
 
 .footer-bs .footer-social ul { list-style: none; padding:0px; }
 .footer-bs .footer-social h2 {
-	font-size: 14px;
-	text-transform: uppercase;
-	letter-spacing: 3px;
+font-size: 14px;
+text-transform: uppercase;
+letter-spacing: 3px;
 }
 .footer-bs .footer-social li { padding:5px 4px;}
 .footer-bs .footer-social a { color:rgba(255,255,255,1.00);}
 .footer-bs .footer-social a:hover { color:rgba(255,255,255,0.80); text-decoration:none; }
 
+.social-media-links i{
+  margin: 1rem;
+}
 
 
 
 @media (min-width: 768px) {
-  .footer-bs .footer-nav { border-left:solid 1px rgba(255,255,255,0.10); }
+.footer-bs .footer-nav { border-left:solid 1px rgba(255,255,255,0.10);
 }
+}
+@media (max-width: 658px){ 
+.footer-pic{
+  display: none;
+}
+}
+
+@media (max-width: 568px) {
+  .footer-bs{
+   padding-top: 30px;
+  }
+}
+
 
 
 
 /* Contact CSS */
+.contact-section{
+  background-image: url('../images/pizza bg 4.jpg') ;
+  background-color: red;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 800px;
+  overflow: hidden; 
+  /* opacity: 0.5; */
+  z-index: 0;
+  
+}
+
 .contact{
   padding: 100px 50px 0px 50px;
-
 }
 
 .contact-header {
+  color:whitesmoke ;
+  font-weight: 600;
+  text-shadow: 4.8px 3px rgb(218, 80, 70);
   margin-bottom: 5rem;
+  font-size: 50px;
+  z-index: 12;
+  opacity: 1;
 }
 
 .contact-text {
+  color: white;
+  font-size: 16px; 
   margin-bottom: 5rem;
+  text-shadow: 2.8px 1px rgb(16, 5, 5);
+
 }
 /* Contact CSS Closed */
-
-
-
-/* About CSS */  
-.about-logo {
-  color: #f4511e;
-  font-size: 200px;
-  margin-top: 50px;
-}
-
-.about-section{     
-   padding-top: 100px ;
-}
-
-
-
-@media screen and (max-width: 768px) {
-  .about-logo-div {
-    text-align: center;
-    margin: 25px 0;
-  }
-}
-
-.carousel-control.right, .carousel-control.left {
-  background-image: none;
-  color: #f4511e;
-}
-
-.carousel-indicators li {
-  border-color: #f4511e;
-}
-
-.carousel-indicators li.active {
-  background-color: #f4511e;
-}
-
-.item h4 {
-  font-size: 19px;
-  line-height: 1.375em;
-  font-weight: 400;
-  font-style: italic;
-  margin: 70px 0;
-}
-
-.item span {
-  font-style: normal;
-}
-
-.customer{
-    text-align: center;
-}
-/* About CSS */
 
 
 
@@ -610,7 +623,8 @@ nav li a {
 
 /* Location CSS */
 .location-section{
-  padding-top: 100px ;
+  /* padding-top: 100px ; */
+  margin-top: 100px;
 }
 
 .location-header{
@@ -808,4 +822,310 @@ label {
   font-size: 0.9rem;
   /* font-weight: normal ; */
   margin-bottom: 0.6rem;
+}
+
+
+
+/* About CSS */
+.aboutus-section {
+  padding: 150px 0;
+}
+.aboutus-title {
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 32px;
+  margin: 0 0 39px;
+  padding: 0 0 11px;
+  position: relative;
+  text-transform: uppercase;
+  color: #000;
+}
+.aboutus-title::after {
+  background:  rgba(164, 22, 26) none repeat scroll 0 0;
+  bottom: 0;
+  content: "";
+  height: 2px;
+  left: 0;
+  position: absolute;
+  width: 54px;
+}
+.aboutus-text {
+  color: #606060;
+  font-size: 13px;
+  line-height: 22px;
+  margin: 0 0 35px;
+}
+
+.aboutus-banner img{
+  margin-top: 80px;
+  height: 90%;
+  width: 90%;
+}
+
+.aboutus-more:hover, .aboutus-more:active, .aboutus-more:focus {
+  color:  rgba(164, 22, 26);;
+  text-decoration: none;
+  outline: 0;
+}
+
+.aboutus-more {
+  border: 1px solid  rgba(164, 22, 26);;
+  border-radius: 25px;
+  color:  rgba(164, 22, 26);
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 7px 20px;
+  text-transform: uppercase;
+}
+.feature .feature-box .iconset {
+  background: whitesmoke none repeat scroll 0 0;
+  float: left;
+  position: relative;
+  width: 18%;
+}
+
+.feature .feature-box .iconset::after {
+  background:  rgba(164, 22, 26) none repeat scroll 0 0;
+  content: "";
+  height: 150%;
+  left: 43%;
+  position: absolute;
+  top: 100%;
+  width: 1px;
+}
+
+.feature .feature-box .feature-content h4 {
+  color: #0f0f0f;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin: 0 0 5px;
+}
+
+
+.feature .feature-box .feature-content {
+  margin-top: 2.3rem;
+  float: left;
+  padding-left: 28px;
+  width: 78%;
+}
+
+.feature .feature-box .feature-content h4 {
+  color: #0f0f0f;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin: 0 0 5px;
+}
+
+.feature .feature-box .feature-content p {
+  color: #606060;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.icon {
+  color : rgba(164, 22, 26);
+  padding:0px;
+  font-size:40px;
+  border: 1px solid rgba(164, 22, 26);
+  border-radius: 100px;
+  font-size: 28px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  width: 70px;
+  margin-left: 0.7rem;
+}
+
+.about-review-name{
+  color: #333;
+  font-size: 6rem;
+  margin-bottom: 0;
+}
+
+.about-review {
+  font-size: 1rem;
+  color: #333;
+}
+
+.carousel-control.right, .carousel-control.left {
+  background-image: none;
+  color: rgba(164, 22, 26);;
+}
+
+.carousel-indicators li {
+  border-color: rgba(164, 22, 26);;
+}
+
+.carousel-indicators li.active {
+  background-color: rgba(164, 22, 26);;
+}
+
+.item h4 {
+  font-size: 19px;
+  line-height: 1.375em;
+  font-weight: 400;
+  font-style: italic;
+  margin: 70px 0;
+}
+
+.item span {
+  font-style: normal;
+}
+
+.customer{
+  text-align: center;    
+}
+
+.comments{
+  margin-top: 50px;
+}
+
+/* About CSS */
+
+
+
+@media all and (max-width: 600px) {
+  .header {
+    margin-top: 9rem;
+    font-size: 1.9rem;
+    font-weight: bold;
+    margin-bottom: 1.1rem;
+    color: white;
+  }
+
+  .para {
+      font-size: 1.7rem;
+      margin-bottom: 1.9rem;
+      color: white;
+    }
+
+  .custom-btn {
+      color: rgba(53, 80, 112);
+      border: 2px solid white ;
+      background-color: rgba(233, 236, 239);
+      width: 12rem;
+      /* letter-spacing: 0.2rem; */
+      font-size: 1.3rem;
+      font-weight: 600;
+      color:white;
+      background-color: rgba(164, 22, 26);
+    }
+
+  .custom-btn:hover {
+      background-color:rgba(164, 22, 26);
+      color: white;
+      border: 1px solid white ;
+    }
+
+
+  .varieties {
+      margin-left: 2rem;
+  }
+
+  .varieties h2 {
+      font-weight: 600;
+      font-size: 2rem;
+      color: black;
+
+  }
+
+  .card {
+    margin: 30px auto;  
+    width: 130px;
+    height: 130px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  .card .card_image {
+    text-align: center;
+    width: 80%;
+    height:80%;
+    border-radius: 40px;
+  }
+
+  .card .card_image img {
+    width: inherit;
+    height: inherit;
+    border-radius: 40px;
+    object-fit: cover;
+  }
+
+  .card .card_title {
+    text-align: center;
+    border-radius: 0px 0px 40px 40px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -10px;
+    height: 40px;
+  }
+
+  .jumbotron {
+    height: 300px; 
+    background-image: url('../images/cell-background-pizza-right.jpg');
+    /* opacity: 0.9; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .icon {
+    color : rgba(164, 22, 26);
+    padding:0px;
+    font-size:40px;
+    border: 1px solid rgba(164, 22, 26);
+    border-radius: 100px;
+    font-size: 28px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    width: 70px;
+    /* margin-left: 1rem; */
+  }
+
+  .aboutus-banner{
+    align-items: center;
+    text-align: center;
+  }
+
+  .aboutus-banner img{
+    margin-top: 80px;
+    height: 50%;
+    width: 50%;
+    margin-bottom: 5rem;
+  }
+
+  .comments {
+    display: none;
+  }
+
+}
+
+
+
+@media all and (max-width: 415px){
+  #carousel{
+    display: none;
+  }
+
+  .icon {
+    color : rgba(164, 22, 26);
+    padding:0px;
+    font-size:40px;
+    border: 1px solid rgba(164, 22, 26);
+    border-radius: 100px;
+    font-size: 28px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    width: 70px;
+    margin-left: -3px;
+  }
 }
