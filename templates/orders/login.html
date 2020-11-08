@@ -202,7 +202,7 @@
 
           const session_token = localStorage.getItem('session_token');
           const phone_number = localStorage.getItem('phone_number');
-          let url = 'http://127.0.0.1:8000/api/phone/verify'
+          let url = 'https://big-pizza.herokuapp.com/api/phone/verify';
           let data = {
             "phone_number": phone_number,
             "security_code": otp,
