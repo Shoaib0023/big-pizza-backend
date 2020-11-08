@@ -36,23 +36,29 @@
         <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
       </div>
       <div class="col-sm-7">
-        <div class="row">
-          <div class="col-sm-6 form-group">
-            <input class="form-control" id="name" name="name" placeholder="Name" required>
+        <form action="mailto:mshoaib9942@gmail.com" method="POST" enctype="text/plain">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="email" name="email" placeholder="Email" required>
+            </div>
           </div>
-          <div class="col-sm-6 form-group">
-            <input class="form-control" id="email" name="email" placeholder="Email" required>
+          <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <button class="btn btn-default  btn-success  pull-right" type="submit">Send</button>
+            </div>
           </div>
-        </div>
-        <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-        <div class="row">
-          <div class="col-sm-12 form-group">
-            <button class="btn btn-default  btn-success  pull-right" type="submit">Send</button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
   </div>
 </section>
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}
