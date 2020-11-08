@@ -139,7 +139,7 @@
 
             // url = `https://2factor.in/API/V1/${api_key}/SMS/+91${phone}/AUTOGEN`
             // const api_key = 'ed4bd15d-180d-11eb-b380-0200cd936042' ;
-            let url = 'http://127.0.0.1:8000/api/phone/register'
+            let url = 'https://big-pizza.herokuapp.com/api/phone/register'
             let data = {
                 'phone_number': phone 
             }
@@ -200,7 +200,7 @@
 
           const session_token = localStorage.getItem('session_token');
           const phone_number = localStorage.getItem('phone_number');
-          let url = 'http://127.0.0.1:8000/api/phone/verify'
+          let url = 'https://big-pizza.herokuapp.com/api/phone/verify'
           let data = {
             "phone_number": phone_number,
             "security_code": otp,
