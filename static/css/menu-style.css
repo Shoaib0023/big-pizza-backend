@@ -131,6 +131,7 @@ nav li a {
   .card .card-image {
     position: relative;
     overflow: hidden;
+    min-height: 150px;
   }
   
   .card .card-image img {
@@ -138,6 +139,7 @@ nav li a {
     background-clip: padding-box;
     position: relative;
     z-index: -1;
+    min-height: 150px;
   }
   
   .card .card-image span.card-title {

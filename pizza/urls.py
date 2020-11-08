@@ -27,7 +27,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name="checkout"),
     path('place-order/', views.place_order, name="place-order"),
     path('', views.home, name="home"),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
