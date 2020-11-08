@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 import requests
 
 from . import forms
-from . models import PizzaTopping, Category, MenuItem, Order, OrderItem
+from . models import PizzaTopping, Category, MenuItem, Order, OrderItem, UserProfile
 
 
 def index(request):
