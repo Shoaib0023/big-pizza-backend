@@ -38,6 +38,7 @@
                         <li><a href="{% url 'menu' %}">MENU</a></li>
                         {% if request.user.is_authenticated %}
                             <li><a href="{% url 'cart-view' %}">CART</a></li>
+                            <li><a href="{% url 'my-orders' %}">MY ORDERS</a></li>
                         {% endif %}
                         <li><a href="{% url 'contact' %}">CONTACT</a></li>
                         <li><a href="{% url 'location' %}">LOCATION</a></li>

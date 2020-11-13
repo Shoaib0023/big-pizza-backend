@@ -107,7 +107,7 @@
                 <span class="price-detail-label">Grand Total</span>
                 <span class="price-detail-price">{{ order.total }}</span>
             </div>
-            <button class="btn btn-success btn-sm btn-block">Place Order</button>
+            <button class="btn btn-success btn-sm btn-block" onClick='toogleplaceOrder("{{ order.id }}")'>Place Order</button>
             <!-- onClick='placeOrder("{{ order.id }}")' -->
         </div>
     </div>
@@ -163,7 +163,74 @@
 
     // DOMS loads 
     $(document).ready(function(){
-        placeOrder = (order_id) => {
+        saveDetails = (order_id) => {
+            const firstname = $('input[name="firstname"]').val();
+            const lastname = $('input[name="lastname"]').val();
+            const address = $('input[name="address"]').val();
+            const phone = $('input[name="phone"]').val();
+            const email = $('input[name="email"]').val();
+
+            if(!firstname){
+                $('.firstname-err').toggleClass('hide-err');
+                return;
+            }
+
+            if(!address){
+                $('.address-err').toggleClass('hide-err');
+                return;
+            }
+
+            if(!phone){
+                $('.phone-err').toggleClass('hide-err');
+                return;
+            }
+
+            if(!email){
+                $('.email-err').toggleClass('hide-err');
+                return;
+            }
+
+            data = {
+                "order_id": order_id,
+                "firstname": firstname,
+                "lastname": lastname,
+                "address": address,
+                "phone": phone,
+                "email": email
+            }
+
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    $('.preloader').show();
+                    if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    // Send the token to same-origin, relative URLs only.
+                    // Send the token only if the method warrants CSRF protection
+                    // Using the CSRFToken value acquired earlier
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+            $.ajax({
+                url: "{% url 'place-order' %}" ,
+                type: "POST",
+                data: data,
+                error: function(err){
+                    console.log(err);
+                },
+                complete: function(data){
+                    console.log("Order placed process is completed !") ;
+                    $('.preloader').hide();
+                },
+                success: function(data){    
+                    console.log("Order is Placed !!", data) ;
+                    window.location.replace('/thanks') ;
+                }
+            })
+
+        }
+
+        toogleplaceOrder = (order_id) => {
             $.ajaxSetup({
                 beforeSend: function (xhr, settings) {
                     if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
@@ -180,14 +247,14 @@
             }
 
             $.ajax({
-                url: "{% url 'place-order' %}" ,
+                url: "{% url 'toggle-place-order' %}" ,
                 type: "POST",
                 data: data,
                 complete: function(data){
-                    console.log("Order is completed !!", data) ;
+                    console.log("Place Order") ;
                 },
                 success: function(data){    
-                    console.log("Order is Placed !!", data) ;
+                    // console.log("Order is Placed !!", data) ;
                     $('#place-order-div').html(data);
                     $('#place-order-modal').modal();
                     // window.location.reload() ;

@@ -10,6 +10,7 @@
     <li><a class="links active" href="{% url 'menu' %}">MENU</a></li>
     {% if request.user.is_authenticated %}
         <li><a href="{% url 'cart-view' %}">CART</a></li>
+        <li><a href="{% url 'my-orders' %}">MY ORDERS</a></li>
     {% endif %}
     <li><a href="{% url 'contact' %}">CONTACT</a></li>
     <li><a href="{% url 'location' %}">LOCATION</a></li>
@@ -237,11 +238,10 @@
                     
                 },
                 complete: function(d){
-                    // console.log("Complete : ", d);
                     $('.preloader').hide();
                 },
                 success: function(data){
-                    window.location.reload();
+                    window.location.href = '/cart';
                     console.log("Success : ", data);
                 }
             });

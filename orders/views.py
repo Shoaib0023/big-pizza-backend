@@ -242,6 +242,17 @@ def cart_view(request):
     return render(request, 'orders/cart.html', args)
 
 
+@login_required(login_url='/login')
+def my_orders(request):
+    customer = request.user
+    orders = Order.objects.filter(customer=customer, placed=True)
+    args = {
+        'orders': orders
+    }
+    return render(request, 'orders/myorders.html', args)
+
+
+
 def remove_item_cart(request):
     try:
         order_id = request.POST["order_id"]
@@ -276,10 +287,67 @@ def checkout(request):
     return render(request, 'orders/checkout.html')
 
 
+def toggle_place_order(request):
+    try:
+        customer = request.user
+        profile = UserProfile.objects.get(user=customer)
+    except UserProfile.DoesNotExist:
+        print("Profile Does not exists !!")
+        profile = UserProfile.objects.create(user=customer)
+
+    order_id = request.POST['order_id']
+
+    args = {
+        'address': profile.address,
+        'phone': profile.phone,
+        'email': customer.email,
+        'firstname': customer.first_name,
+        'lastname': customer.last_name,
+        'order_id': order_id
+    }
+
+    return render(request, 'orders/place-order-modal.html', args)
+
+
 def place_order(request):
     customer = request.user
-    profile = customer.profile
-    print(customer)
-    print(customer.email, customer.username)
+    # print(request.user, request.user.id)
+    # print(profile)
+    profile = UserProfile.objects.get(user=customer)
+    
+    if not profile.address:
+        profile.address = request.POST.get('address', '')
+    
+    if not profile.phone:
+        profile.phone = request.POST.get('phone', '')
 
-    return render(request, 'orders/place-order-modal.html')
+    if not customer.email:
+        customer.email = request.POST.get('email', '')
+
+    if not customer.first_name:
+        customer.first_name = request.POST.get('firstname', '')
+
+    if not customer.last_name:
+        customer.last_name = request.POST.get('lastname', '')
+
+    profile.save()
+    customer.save()
+
+    order_id = request.POST['order_id']
+    order = Order.objects.get(id=order_id)
+    order.placed = True
+    order.in_cart = False
+    order.save()
+    return JsonResponse({"success": "Order is Placed !"})
+
+
+def thanks(request):
+    customer = request.user
+    args = {
+        'user': customer 
+    }
+    return render(request, 'orders/thanks.html', args)
+
+
+
+

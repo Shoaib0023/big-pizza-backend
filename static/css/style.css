@@ -216,6 +216,14 @@ nav li a {
     flex-direction: column;
   }
 
+  .save-btn, .save-btn:hover, 
+  .save-btn:focus, .save-btn:active {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    background-color:  rgba(164, 22, 26); 
+    color: white;
+  }
+
 
 
    /* carousel */
@@ -478,6 +486,7 @@ letter-spacing: 3px;
   /* background-color: rgb(238, 238, 238); */
   /* background-color: rgb(250, 245, 246); */
   background-color: white;
+  margin-bottom: 2rem;
 }
 
 .cart-item-name {
@@ -673,11 +682,10 @@ letter-spacing: 3px;
 /* Place Order Modal */
 .modal.left .modal-dialog,
 	.modal.right .modal-dialog {
-		position: fixed;
-    /* margin-top: %; */
-    /* background-color: whitesmoke; */
+    position: fixed;
+    margin-top: 8%;
 		width: 500px;
-		height: 100%;
+		height: 95%;
 		-webkit-transform: translate3d(0%, 0, 0);
 		    -ms-transform: translate3d(0%, 0, 0);
 		     -o-transform: translate3d(0%, 0, 0);
@@ -688,12 +696,14 @@ letter-spacing: 3px;
 	.modal.left .modal-content,
 	.modal.right .modal-content {
 		height: 80%;
-		overflow-y: hidden;
+    overflow-y: auto;
+    background-color: rgb(242, 242, 242);
 	}
 	
 	.modal.left .modal-body,
 	.modal.right .modal-body {
     padding: 15px 25px 80px;
+    background-color: rgb(242, 242, 242);
     /* background-color: whitesmoke; */
 	}
 
@@ -730,7 +740,7 @@ letter-spacing: 3px;
   margin-top: 25px;
   height: auto;
   /* background: #1A2226; */
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -771,7 +781,8 @@ letter-spacing: 3px;
 
 input[type=text] ,input[type=email],input[type=password]{
   /* background-color: #1A2226; */
-  background-color: white;
+  /* background-color: white; */
+  background-color: rgb(242, 242, 242);
   border: none;
   border-bottom: 2px solid #dc35466d;
   border-top: 0px;
@@ -798,7 +809,8 @@ input[type=text] ,input[type=email],input[type=password]{
   border-bottom: 2px solid #dc3545;
   outline: 0;
   /* background-color: #1A2226; */
-  background-color: white;
+  /* background-color: white; */
+  background-color: rgb(242, 242, 242);
   /* color: #ECF0F5; */
   /* color: grey; */
 }
@@ -841,6 +853,8 @@ label {
   /* font-weight: normal ; */
   margin-bottom: 0.6rem;
 }
+
+
 
 
 
@@ -1003,6 +1017,49 @@ label {
 }
 
 /* About CSS */
+
+
+/* Thanks CSS */
+.thanks-div {
+  margin-top: 5rem;
+  padding: 5rem;
+  text-align: center;
+  background-color: white;
+}
+
+.fa-check-circle{
+  color: green;
+}
+
+.order-confirm-header{
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: green;
+}
+
+.order-confirm-para{
+  font-size: 1.7rem;
+  margin-top: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.order-summary{
+  text-align: center;
+  padding: 5rem;
+}
+
+.order-summary-header{
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+
+
+/* MyOrders CSS */
+.myorders-div{
+  padding:5rem;
+}
+
 
 
 
@@ -1218,6 +1275,38 @@ label {
 
   .removebtn{
     font-size: 0.8rem;
+  }
+
+  .save-btn {
+    margin-bottom: 2rem;
+  }
+
+  .modal.left .modal-dialog,
+	.modal.right .modal-dialog {
+    top: 10%;
+		position: fixed;
+    /* margin-top: %; */
+    /* background-color: whitesmoke; */
+		width: 320px;
+		height: 90%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+    
+  }
+  
+  .pizza-logo{
+    margin-left: 5px;
+  }
+  
+  .login-key {
+    height: 100px;
+    font-size: 35px;
+    line-height: 100px;
+    background-color:  rgba(164, 22, 26);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
 }

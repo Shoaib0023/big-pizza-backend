@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}BigPizza | Thanks {% endblock %}
+
+{% block body %}
+    <div class="container thanks-div">
+        <h4 class="order-confirm-header"><i class="fas fa-check-circle"></i> ORDER CONFIRMATION</h4>
+        <p class="order-confirm-para">{{ user.first_name }} {{ user.last_name }} thank you for your order<br>
+        Our Chef will contact you as soon as your delicious order is ready.</p>
+        
+        <a href="#">View your Orders</a>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

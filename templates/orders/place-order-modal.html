@@ -4,48 +4,75 @@
         <div class="modal-content">
 
             <div class="login-box">
-                <div class="col-lg-12 login-key">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 login-key">
                     <i class="fas fa-pizza-slice"> <span class="pizza-logo">BIG PIZZA</span> </i>
                 </div>    
             </div>
 
 
-            <div class="col-lg-12 login-form">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 login-form">
                     
                 <form>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label">Firstname</label>
-                                <input type="text" class="form-control">
+                                <label class="form-control-label">Firstname <span class="text-danger">*</span></label>
+                                {% if firstname %}
+                                    <input type="text" class="form-control" name="firstname" value="{{firstname}}" required>
+                                {% else %}
+                                    <input type="text" class="form-control" name="firstname" required>
+                                {% endif %}
+                                <p class="small text-danger mt-2 firstname-err hide-err">Required</p>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                             <label class="form-control-label">Lastname</label>
-                            <input type="text" class="form-control">
+                             {% if lastname %}
+                                <input type="text" class="form-control" name="lastname" value={{lastname}}>
+                             {% else %}
+                                <input type="text" class="form-control" name="lastname">
+                             {% endif %}
                             </div>
                         </div>
 
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label">Address</label>
-                        <input type="text" class="form-control">
+                        <label class="form-control-label">Address<span class="text-danger">*</span></label>
+                        {% if address %}
+                            <input type="text" class="form-control required" name="address" value={{address}}>
+                        {% else %}
+                            <input type="text" class="form-control required" name="address">
+                        {% endif %}
+                        <p class="small text-danger mt-2 address-err hide-err">Required</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label">Email</label>
-                        <input type="email" class="form-control">
+                        <label class="form-control-label">Email<span class="text-danger">*</span></label>
+                        {% if email %}
+                            <input type="email" class="form-control" name="email" value={{email}} disabled>
+                        {% else %}
+                            <input type="email" class="form-control" name="email" required>
+                        {% endif %}
+                        <p class="small text-danger mt-2 email-err hide-err">Required</p>
+                        
                     </div>
                 
                     <div class="login-form">
                         <div class="form-group">
-                            <label class="form-control-label">Phone</label>
-                            <input type="text" class="form-control">
+                            <label class="form-control-label">Phone<span class="text-danger">*</span></label>
+                            {% if phone %}
+                                <input type="text" class="form-control is-invalid" name="phone" value={{phone}} disabled>
+                            {% else %}
+                                <input type="text" class="form-control is-invalid" name="phone" required>
+                            {% endif %}
+                            <p class="small text-danger mt-2 phone-err hide-err">Required</p>
                         </div>
                     </div>
+
+                    <button class="btn btn-primary btn-sm btn-block save-btn" onclick='saveDetails("{{ order_id }}")'>Save & Continue</button>
                 </form>
 
                 
