@@ -168,7 +168,11 @@
             const lastname = $('input[name="lastname"]').val();
             const address = $('input[name="address"]').val();
             const phone = $('input[name="phone"]').val();
+            const is_phone_verified = $('input[name="phone"]').data("is-phone-verified");
+            const is_email_verified = $('input[name="email"]').data("is-email-verified");
             const email = $('input[name="email"]').val();
+
+            console.log(phone, is_phone_verified, is_email_verified)
 
             if(!firstname){
                 $('.firstname-err').toggleClass('hide-err');
@@ -180,12 +184,12 @@
                 return;
             }
 
-            if(!phone){
+            if(!phone && !is_phone_verified){
                 $('.phone-err').toggleClass('hide-err');
                 return;
             }
 
-            if(!email){
+            if(!email && !is_email_verified ){
                 $('.email-err').toggleClass('hide-err');
                 return;
             }

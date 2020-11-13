@@ -7,6 +7,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth import login as django_login
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from allauth.socialaccount.models import SocialAccount
 
 from django.contrib.auth.decorators import login_required
 
@@ -74,7 +75,7 @@ def verify_and_register(request):
                 userProfile = UserProfile.objects.create(
                             user=user, 
                             phone=data["phone_number"], 
-                            is_verified=True
+                            is_phone_verified=True
                         )
 
                 django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
@@ -291,15 +292,22 @@ def toggle_place_order(request):
     try:
         customer = request.user
         profile = UserProfile.objects.get(user=customer)
+
     except UserProfile.DoesNotExist:
-        print("Profile Does not exists !!")
         profile = UserProfile.objects.create(user=customer)
+
+    if SocialAccount.objects.filter(user=customer).exists():
+            socialaccount = SocialAccount.objects.get(user=customer)
+            profile.is_email_verified = True
+            profile.save()
 
     order_id = request.POST['order_id']
 
     args = {
         'address': profile.address,
         'phone': profile.phone,
+        'is_phone_verified': profile.is_phone_verified,
+        'is_email_verified': profile.is_email_verified,
         'email': customer.email,
         'firstname': customer.first_name,
         'lastname': customer.last_name,

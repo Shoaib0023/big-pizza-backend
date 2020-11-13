@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="profile")
     phone = models.IntegerField(null=True, blank=True)
-    is_verified = models.BooleanField(default=False)
+    is_phone_verified = models.BooleanField(default=False)
+    is_email_verified = models.BooleanField(default=False)
     address = models.CharField(max_length=1200, null=True, blank=True)
 
     def __str__(self):
