@@ -7,108 +7,116 @@
 
 <div class="cart-section">
     {% if items %}
-        {% for item in items %}
-            <div class="row cart-row">
+        <div class="cart-custom">
+            {% for item in items %}
+                <div class="row cart-row">
 
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 cart-item">
-                    <div class="row">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-                            <img class="img-responsive" src="{% static 'images/6.jpg' %}" width=200px height=200px> 
-                        </div>  
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4">
-                            <h3 class="cart-item-name"> <strong>{{ item.name }}</strong></h3>
-                            <p class="cart-item-description">{{item.description}}</p>
-                            <p class="cart-item-size badge">{{ item.size }}</p>
-                            <p class="cart-item-category badge">{{ item.category.name }}</p>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
-                            {% if item.toppings.all.count > 0 %}
-                                <h5 id="topping-header">Toppings</h5>
-                                <ul>
-                                    {% for topping in item.toppings.all %}
-                                        <li class="topping-name">{{ topping.name }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                            <p class="cart-price">{{ item.price }}</p>
-        
-                            {% for topping in item.toppings.all %}
-                                <p class="small price">60</p>
-                            {% endfor %}
-                        </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 cart-item">
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2 cart-image-div">
+                                <img class="img-responsive" src="{% static 'images/6.jpg' %}" width=200px height=200px> 
+                            </div>  
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-4">
+                                <h3 class="cart-item-name"> <strong>{{ item.name }}</strong></h3>
+                                <p class="cart-item-description">{{item.description}}</p>
+                                <p class="cart-item-size badge">{{ item.size }}</p>
+                                <p class="cart-item-category badge">{{ item.category.name }}</p>
+                            </div>
 
-                        <!-- <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                            <button class="btn btn-sm btn-danger removebtn" onClick='removeBtn("{{ item.name}}", "{{ item.id }}", "{{ order.id }}", "{{ item.size }}")'><i class="fas fa-trash"></i></button>
-                        </div> -->
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-3">
+                                {% if item.toppings.all.count > 0 %}
+                                    <h5 id="topping-header">Toppings</h5>
+                                    <ul>
+                                        {% for topping in item.toppings.all %}
+                                            <li class="topping-name">{{ topping.name }}</li>
+                                        {% endfor %}
+                                    </ul>
 
-                    </div>    
-                    <div class="row removebtn-row">
-                        <div class="col-12">
-                            <button class="btn btn-block btn-danger removebtn" onClick='removeBtn("{{ item.name}}", "{{ item.id }}", "{{ order.id }}", "{{ item.size }}")'><i class="fas fa-trash"></i></button>
-                        </div>  
-                    </div>    
-                    <!-- <hr> -->
-                </div>
-            </div>
+                                {% else %}
+                                <p class="cart-no-topping">No Topping Selected</p>
+                                {% endif %}
+                            </div>
 
-
-            <!-- Modal -->
-            <div class="modal fade" id="confirm-remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+                                <p class="cart-price">{{ item.price }}</p>
             
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" id="close-icon">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
+                                {% for topping in item.toppings.all %}
+                                    <p class="small price">60</p>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 remove-btn-div">
+                                <button class="btn btn-sm btn-danger removebtn" onClick='removeBtn("{{ item.name}}", "{{ item.id }}", "{{ order.id }}", "{{ item.size }}")'><i class="fas fa-trash"></i></button>
+                            </div>
+
+                        </div>    
+                        <!-- <div class="row removebtn-row">
+                            <div class="col-12">
+                                <button class="btn btn-block btn-danger removebtn" onClick='removeBtn("{{ item.name}}", "{{ item.id }}", "{{ order.id }}", "{{ item.size }}")'><i class="fas fa-trash"></i></button>
+                            </div>  
+                        </div>     -->
+                        <!-- <hr> -->
                     </div>
 
-                    <div class="modal-body">
-                        <p>Are you sure ?</p>
-                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirm-remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                    
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" id="close-icon">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                            </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-outline-success finalremovebtn">Remove</button>
-                    </div>
-                
-                    </div>
+                            <div class="modal-body">
+                                <p>Are you sure ?</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-sm btn-outline-success finalremovebtn">Remove</button>
+                            </div>
+                        
+                            </div>
+                        </div>
+                    </div>        
                 </div>
-            </div>        
-        {% endfor %}
+            {% endfor %}
+        </div>
     {% else %}
 
     {% endif %}
 
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 price-details">
-        
-        <div class="payment-details">
-            <h5 class="payment-mode-header">Mode of Payment</h5>
-            <p class="small lead">**We only provides Cash on Delivery for now</p>
-            <hr>
-            <p><i class="far fa-check-square cod"></i><span class="cod-text">Cash on Delivery</span></p>
-        </div>
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 price-details">
+            
+            <div class="payment-details">
+                <h5 class="payment-mode-header">Mode of Payment</h5>
+                <p class="small lead">**We only provides Cash on Delivery for now</p>
+                <hr>
+                <p><i class="far fa-check-square cod"></i><span class="cod-text">Cash on Delivery</span></p>
+            </div>
 
-        <div id="price-details-inner">
-            <div class="sub-price-details">
-                <span class="price-detail-label">Sub Total</span>
-                <span class="price-detail-price">{{ order.total }}</span>
+            <div id="price-details-inner">
+                <div class="sub-price-details">
+                    <span class="price-detail-label">Sub Total</span>
+                    <span class="price-detail-price">{{ order.total }}</span>
+                </div>
+                <div class="sub-price-details">
+                    <span class="price-detail-label">GST</span>
+                    <span class="price-detail-price">0</span>
+                </div>
+                <div class="sub-price-details">
+                    <span class="price-detail-label">Discount</span>
+                    <span class="price-detail-price">0</span>
+                </div>
+                <hr>
+                <div class="sub-price-details">
+                    <span class="price-detail-label">Grand Total</span>
+                    <span class="price-detail-price">{{ order.total }}</span>
+                </div>
+                <button class="btn btn-success btn-sm btn-block" onClick='toogleplaceOrder("{{ order.id }}")'>Place Order</button>
+                <!-- onClick='placeOrder("{{ order.id }}")' -->
             </div>
-            <div class="sub-price-details">
-                <span class="price-detail-label">GST</span>
-                <span class="price-detail-price">0</span>
-            </div>
-            <div class="sub-price-details">
-                <span class="price-detail-label">Discount</span>
-                <span class="price-detail-price">0</span>
-            </div>
-            <hr>
-            <div class="sub-price-details">
-                <span class="price-detail-label">Grand Total</span>
-                <span class="price-detail-price">{{ order.total }}</span>
-            </div>
-            <button class="btn btn-success btn-sm btn-block" onClick='toogleplaceOrder("{{ order.id }}")'>Place Order</button>
-            <!-- onClick='placeOrder("{{ order.id }}")' -->
         </div>
     </div>
 </div>    

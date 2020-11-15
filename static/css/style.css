@@ -4,6 +4,7 @@ body {
     width: 100%;
     background-color: rgb(242, 242, 242);
     position: relative;
+    overflow-x: hidden;
 }
 
 .hide-err{
@@ -471,7 +472,7 @@ letter-spacing: 3px;
 
 /* Cart CSS */
 .cart-section{
-  padding: 10rem;
+  padding: 4rem;
   position: relative;
 }
 
@@ -482,11 +483,9 @@ letter-spacing: 3px;
 
 .cart-item {
   padding: 2rem;
-  /* margin-top: 5rem; */
-  /* background-color: rgb(238, 238, 238); */
-  /* background-color: rgb(250, 245, 246); */
   background-color: white;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  /* width: 100%; */
 }
 
 .cart-item-name {
@@ -1181,19 +1180,23 @@ label {
     display: none;
   }
 
+  .cart-section{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
   .price-details{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: stretch;
-    position: absolute;
-    left: 1%;
+    /* position: absolute; */
+    left: 0%;
     right: -5%;
+    top:2%;
     font-weight: 600;
-    /* background-color: grey; */
-    /* top: 25%; */
     width: 100%; 
-    /* margin-bottom: 10rem; */
+    margin-bottom: 20rem;
   }
 
   #price-details-inner{
@@ -1203,23 +1206,18 @@ label {
     margin-left: 1rem;
   }
 
-  .cart-row {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    width: 95%;
-    top: 90%;
-  }
-
   .cart-item {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
-    left: -12%;
+    /* left: -12%; */
     flex-direction: row;
-    margin-top: 10rem;
+    /* margin-top: 5rem; */
     padding: 2rem;
     background-color: white;
+  }
+
+  .cart-custom{
+    margin-top: 23rem;
   }
 
   .cart-item-name {
@@ -1244,6 +1242,7 @@ label {
     background-color: yellowgreen;
   }
 
+
   #topping-header{
     margin-top: 5px;
     font-weight: 600;
@@ -1259,13 +1258,13 @@ label {
   .cart-price {
     margin-top: 0.8rem;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: rgb(44, 101, 128);
   }
   
   .price {
     color: rgb(44, 101, 128);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
   }
 
@@ -1275,6 +1274,12 @@ label {
 
   .removebtn{
     font-size: 0.8rem;
+
+  }
+
+  .remove-btn-div{
+    float: right;
+    text-align: right;
   }
 
   .save-btn {
@@ -1285,8 +1290,6 @@ label {
 	.modal.right .modal-dialog {
     top: 10%;
 		position: fixed;
-    /* margin-top: %; */
-    /* background-color: whitesmoke; */
 		width: 320px;
 		height: 90%;
 		-webkit-transform: translate3d(0%, 0, 0);
@@ -1294,7 +1297,7 @@ label {
 		     -o-transform: translate3d(0%, 0, 0);
             transform: translate3d(0%, 0, 0);
     
-  }
+  } 
   
   .pizza-logo{
     margin-left: 5px;
@@ -1332,34 +1335,45 @@ label {
     margin-left: -3px;
   }
 
-
-  .cart-item {
-    width: 100%;
-    display: flex;
-    left: -20%;
-    flex-direction: row;
-    margin-top: 10rem;
-    padding: 0.4rem;
-    background-color: white;
-    position: relative;
-    right: -5%;
+  .cart-row{
+    padding: 0rem;
+    /* width: 100%; */
   }
 
-  .img-responsive {
-    position: absolute;
+  .cart-custom{
+    margin-top: 18rem;
+  }
+
+  .cart-item {
+    width: 108%;
+    display: flex;
+    left: -4%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 1rem;
+    background-color: white;
+    /* right: -5%; */
+    
+  }
+
+  .cart-image-div{
     display: none;
+  }
+
+  .removebtn{
+    margin-top: 0.5rem;
   }
 
   .cart-price {
     margin-top: 0.8rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: rgb(44, 101, 128);
   }
   
   .price {
     color: rgb(44, 101, 128);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
   }
 
@@ -1373,6 +1387,11 @@ label {
 
   .cod{
     font-size: 1.2rem;
+  }
+
+  .cart-no-topping{
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
   }
 
   .cod-text{ 
