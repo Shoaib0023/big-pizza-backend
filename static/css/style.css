@@ -703,7 +703,6 @@ letter-spacing: 3px;
 	.modal.right .modal-body {
     padding: 15px 25px 80px;
     background-color: rgb(242, 242, 242);
-    /* background-color: whitesmoke; */
 	}
 
 	.modal.left.fade .modal-dialog{
@@ -738,8 +737,6 @@ letter-spacing: 3px;
 .login-box {
   margin-top: 25px;
   height: auto;
-  /* background: #1A2226; */
-  /* background-color: whitesmoke; */
   text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -752,7 +749,6 @@ letter-spacing: 3px;
   height: 100px;
   font-size: 48px;
   line-height: 100px;
-  /* background: -webkit-linear-gradient(#27EF9F, #0DB8DE); */
   background-color:  rgba(164, 22, 26);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1317,6 +1313,19 @@ label {
 
 
 @media all and (max-width: 415px){
+  .modal.left .modal-dialog,
+	.modal.right .modal-dialog {
+    top: 10%;
+		position: fixed;
+		width: 250px;
+		height: 90%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+    
+  }
+  
   #carousel{
     display: none;
   }
@@ -1404,6 +1413,15 @@ label {
 
   .price-detail-price {
     font-size: 1rem;
+  }
+
+  .login-key {
+    height: 90px;
+    font-size: 28px;
+    line-height: 100px;
+    background-color:  rgba(164, 22, 26);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
 }

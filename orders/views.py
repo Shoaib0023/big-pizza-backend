@@ -40,23 +40,25 @@ def home(request):
 
 def verify_and_register(request):
     if request.method == "POST":
-        data = {
-            "phone_number": request.POST.get("phone_number", None),
-            "security_code": request.POST.get("security_code", None),
-            "session_token": request.POST.get("session_token", None)
-        }
+        # data = {
+        #     "phone_number": request.POST.get("phone_number", None),
+        #     "security_code": request.POST.get("security_code", None),
+        #     "session_token": request.POST.get("session_token", None)
+        # }
+        phone_number = request.POST.get("phone_number", None)
+        session_token = request.POST.get("session_token", None)
+        security_code = request.POST.get("security_code", None)
 
-        print(data)
+        print(phone_number, session_token, security_code)
 
-        url = 'https://big-pizza.herokuapp.com/api/phone/verify'
-        response = requests.post(url, data)
+        url = f'https://2factor.in/API/V1/ed4bd15d-180d-11eb-b380-0200cd936042/SMS/VERIFY/{session_token}/{security_code}'
+        response = requests.get(url)
         print("Response : ", response.json())
         print("Response Status : ", response.status_code)
 
         if response.status_code == 200:
-            if User.objects.filter(username=data["phone_number"]).exists():
-                user = User.objects.get(username=data["phone_number"])
-                # logged_user = authenticate(username=user.username, password=user.password)
+            if User.objects.filter(username=phone_number).exists():
+                user = User.objects.get(username=phone_number)
                 if user is not None:
                     print("User already exists !")
                     django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
@@ -68,18 +70,18 @@ def verify_and_register(request):
             else:
                 print("Creating new user !!")
                 user = User.objects.create(
-                            username=data["phone_number"],
+                            username=phone_number,
                             password="abcd@786"
                         )
 
                 userProfile = UserProfile.objects.create(
                             user=user, 
-                            phone=data["phone_number"], 
+                            phone=phone_number, 
                             is_phone_verified=True
                         )
 
                 django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                # print(request.user.is_authenticated)
+                print("IS USER AUTHENTICATED : ",request.user.is_authenticated)
                 return JsonResponse({"success": "Successfully Logged in"}, status=201)
 
         else:

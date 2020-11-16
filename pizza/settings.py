@@ -24,7 +24,7 @@ SECRET_KEY = 'ldx1-v&(685w3ndasex2l803(3=z(!^h$ct@s-ctrh+4)=hqje'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['18.190.9.133', 'bigpizza.in', 'www.bigpizza.in']
+ALLOWED_HOSTS = ['127.0.0.1', '18.190.9.133', 'bigpizza.in', 'www.bigpizza.in']
 
 # Application definition
 INSTALLED_APPS = [

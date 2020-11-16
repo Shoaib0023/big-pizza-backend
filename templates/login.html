@@ -31,7 +31,7 @@
 
                     <div class="row generate-otp">
                         <label class="form-control-label custom-label">Login with your valid mobile number</label>
-                        <input type="tel" class="form-control mb-2" id="exampleInputNumber" aria-describedby="Phone" name="phone" placeholder="+91 | Enter Phone Number">
+                        <input type="tel" class="form-control mb-2" id="exampleInputNumber" aria-describedby="Phone" name="phone" placeholder="Enter Phone Number">
                         <p class="small text-danger number-err d-none mt-1 mb-2">Enter valid number</p>
                         <button type="submit" class="btn btn-dark btn-block btn-sm mb-5 generate-otp-btn">Generate OTP</button>
                     </div>
@@ -135,17 +135,12 @@
             });
 
 
-            // url = `https://2factor.in/API/V1/${api_key}/SMS/+91${phone}/AUTOGEN`
-            // const api_key = 'ed4bd15d-180d-11eb-b380-0200cd936042' ;
-            let url = 'https://bigpizza.in/api/phone/register';
-            let data = {
-                'phone_number': phone 
-            }
-
+            const api_key = 'ed4bd15d-180d-11eb-b380-0200cd936042' ;
+            let url = `https://2factor.in/API/V1/${api_key}/SMS/+91${phone}/AUTOGEN`
+          
             $.ajax({
                 url: url,
-                type: 'POST',
-                data: data,
+                type: 'GET',
                 error: function(err){
                     $('.preloader').hide();
                     $('.login-form-1').css("opacity", "1");
@@ -159,7 +154,7 @@
                     $('.preloader').hide();
                     $('.login-form-1').css("opacity", "1");
 
-                    session_token = data["session_token"];
+                    session_token = data["Details"];
                     localStorage.clear();
                     localStorage.setItem('session_token', session_token);                  // storing token in localStorage
                     localStorage.setItem('phone_number', phone);                           // storing phone in localStorage
