@@ -33,7 +33,7 @@ urlpatterns = [
     path('thanks/', views.thanks, name="thanks"),
     path('', views.home, name="home"),
 
-]   
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

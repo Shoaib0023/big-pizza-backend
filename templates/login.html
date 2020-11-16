@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <!-- <link rel="stylesheet" href='{% static "css/style.css" %}'> -->
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 
@@ -114,7 +113,6 @@
 
         $('.generate-otp-btn').click(function(e){
             e.preventDefault();
-            console.log("clicked !!") ;
 
             let phone = $('#exampleInputNumber').val();
             if(!phone){
@@ -139,7 +137,7 @@
 
             // url = `https://2factor.in/API/V1/${api_key}/SMS/+91${phone}/AUTOGEN`
             // const api_key = 'ed4bd15d-180d-11eb-b380-0200cd936042' ;
-            let url = 'https://big-pizza.herokuapp.com/api/phone/register';
+            let url = 'https://bigpizza.in/api/phone/register';
             let data = {
                 'phone_number': phone 
             }
@@ -176,56 +174,55 @@
 
         // When user enters OTP
         $(".enter-otp-btn").click(function(e){
-          e.preventDefault();
-          console.log("Clicked Enter OTP !!");
+            e.preventDefault();
+            console.log("Clicked Enter OTP !!");
 
-          let otp = $('#exampleInputOTP').val();
-          if(!otp){
-              $('.otp-err').removeClass('d-none');
-              return ;
-          }
-          
-          $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                $('.preloader').show();
-                $('.login-form-1').css("opacity", "0.7");
-                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                // Send the token to same-origin, relative URLs only.
-                // Send the token only if the method warrants CSRF protection
-                // Using the CSRFToken value acquired earlier
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            let otp = $('#exampleInputOTP').val();
+            if(!otp){
+                $('.otp-err').removeClass('d-none');
+                return ;
+            }
+            
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    $('.preloader').show();
+                    $('.login-form-1').css("opacity", "0.7");
+                    if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    // Send the token to same-origin, relative URLs only.
+                    // Send the token only if the method warrants CSRF protection
+                    // Using the CSRFToken value acquired earlier
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
                 }
-            }
-          });
+            });
 
-          const session_token = localStorage.getItem('session_token');
-          const phone_number = localStorage.getItem('phone_number');
-          let url = 'https://big-pizza.herokuapp.com/api/phone/verify';
-          let data = {
-            "phone_number": phone_number,
-            "security_code": otp,
-            "session_token": session_token
-          }
-
-          $.ajax({
-            url: `{% url 'verify-and-register' %}`,
-            type: 'POST',
-            data: data,
-            error: function(err){
-              $('.preloader').hide();
-              $('.login-form-1').css("opacity", "1");
-              console.log("Error", err);
-              err_text = err["responseText"]["non_field_errors"][0];
-              $('.otp-err').text(err_text);
-              $('.otp-err').removeClass('d-none');
-            },
-            success: function (data) {
-              console.log(data);
-              $('.preloader').hide();
-              $('.login-form-1').css("opacity", "1");
-              window.location.href = '/menu';
+            const session_token = localStorage.getItem('session_token');
+            const phone_number = localStorage.getItem('phone_number');
+            let data = {
+                "phone_number": phone_number,
+                "security_code": otp,
+                "session_token": session_token
             }
-          });   
+
+            $.ajax({
+                url: `{% url 'verify-and-register' %}`,
+                type: 'POST',
+                data: data,
+                error: function(err){
+                    $('.preloader').hide();
+                    $('.login-form-1').css("opacity", "1");
+                    console.log("Error", err);
+                    err_text = err["responseText"]["non_field_errors"][0];
+                    $('.otp-err').text(err_text);
+                    $('.otp-err').removeClass('d-none');
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('.preloader').hide();
+                    $('.login-form-1').css("opacity", "1");
+                    window.location.href = '/menu';
+                }
+            });   
 
       });
 

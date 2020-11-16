@@ -79,7 +79,7 @@ def verify_and_register(request):
                         )
 
                 django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                print(request.user.is_authenticated)
+                # print(request.user.is_authenticated)
                 return JsonResponse({"success": "Successfully Logged in"}, status=201)
 
         else:

@@ -24,8 +24,6 @@ SECRET_KEY = 'ldx1-v&(685w3ndasex2l803(3=z(!^h$ct@s-ctrh+4)=hqje'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# AUTH_USER_MODEL = 'orders.MyUser'
-
 ALLOWED_HOSTS = ['127.0.0.1', '18.190.9.133', 'bigpizza.in', 'www.bigpizza.in']
 
 # Application definition
@@ -168,7 +166,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE =  'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -182,7 +180,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = (os.path.join('static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'

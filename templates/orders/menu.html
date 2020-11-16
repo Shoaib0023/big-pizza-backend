@@ -75,7 +75,7 @@
                 {% else %}
                     <div class="card">
                         <div class="card-image">
-                            <img class="img-responsive" src="{{ pizza.image.url }}">
+                            <img class="img-responsive" src="{% static 'images/6.jpg' %}">
                             <span class="card-title">Rs 
                                 {% if pizza.sm_available %}
                                     {{ pizza.sm_price }}
